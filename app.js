@@ -12,18 +12,27 @@ const v1 = express.Router();
 app.use('/', v1);
 
 v1.get('/dummy', function(req, res) {
+  console.log(' > /dummy');
   const date = Date.now();
   res.json({date});
 });
 
-v1.get('/block', function(req, res) {
-  console.log('this call will block for 30s');
-  new Promise((resolve) => {
+function blockingPromiseCall() {
+  return new Promise((resolve) => {
+    const startTs = Date.now();
+    console.log(' > call foo()');
     lib.foo();
+    console.log(' > resolve() after', Date.now() - startTs);
     resolve();
-  }).then(() => {
-    res.json({ done: true});
   });
+}
+
+v1.get('/block', function(req, res) {
+  console.log(' > /block, this call will block for 30s');
+  return blockingPromiseCall()
+    .then(() => {
+      res.json({ done: true });
+    });
 });
 
 const server = http.createServer(app);

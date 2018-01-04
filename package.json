@@ -13,6 +13,7 @@
     "execute:autogypi": "autogypi",
     "node-gyp": "node-gyp",
     "start": "node app.js",
+    "start:debug": "node --inspect app.js",
     "install": "npm run install:build",
     "install:build": "npm run execute:autogypi && node-gyp configure build"
   }
