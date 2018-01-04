@@ -1,0 +1,19 @@
+{
+  "name": "clang-bug",
+  "version": "1.0.0",
+  "description": "Show nbind Issue #100",
+  "dependencies": {
+    "debug": "^2.6.9",
+    "express": "^4.15.3",
+    "autogypi": "^0.2.2",
+    "nbind": "^0.3.14",
+    "node-gyp": "^3.6.2"
+  },
+  "scripts": {
+    "execute:autogypi": "autogypi",
+    "node-gyp": "node-gyp",
+    "start": "node app.js",
+    "install": "npm run install:build",
+    "install:build": "npm run execute:autogypi && node-gyp configure build"
+  }
+}
