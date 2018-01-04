@@ -3,6 +3,8 @@
 const express = require('express');
 const nbind = require('nbind');
 const http = require('http');
+const bluebird = require('bluebird');
+const blocked = require('blocked');
 
 const binding = nbind.init(__dirname);
 const lib = binding.lib;
@@ -18,7 +20,7 @@ v1.get('/dummy', function(req, res) {
 });
 
 function blockingPromiseCall() {
-  return new Promise((resolve) => {
+  return new bluebird.Promise((resolve) => {
     const startTs = Date.now();
     console.log(' > call foo()');
     lib.foo();
@@ -39,3 +41,11 @@ const server = http.createServer(app);
 server.listen(7777, '0.0.0.0', () => {
   console.log('STARTUP_COMPLETE');
 });
+
+blocked((ms) => {
+  console.log('event loop Blocked', ms);
+}, { threshold:500 });
+
+setInterval(() => {
+  console.log('PING!');
+}, 1000);

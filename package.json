@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Show nbind Issue #100",
   "dependencies": {
+    "autogypi": "^0.2.2",
+    "blocked": "^1.2.1",
+    "bluebird": "^3.5.1",
     "debug": "^2.6.9",
     "express": "^4.15.3",
-    "autogypi": "^0.2.2",
     "nbind": "^0.3.14",
     "node-gyp": "^3.6.2"
   },
